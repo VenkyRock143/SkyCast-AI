@@ -2,7 +2,7 @@
 
 A full-stack weather intelligence platform built with Next.js, Node.js, MongoDB, and Groq AI. Track cities worldwide, get live weather data, and ask an AI assistant anything about conditions, travel, or what to wear today.
 
-**Live demo:** [weather-dashborad-api.netlify.app](https://weather-dashborad-api.netlify.app)
+**Live demo:** [SkyCast](https://skycast-dashboard-ai.netlify.app/)
 
 ---
 
