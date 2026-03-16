@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 
 let isConnected = false;
 
-const connectDB = async () => {
-  if (isConnected) {
-    logger.info("Using existing MongoDB connection");
+  const connectDB = async () => {
+   if (isConnected) {
+    console.log("Using existing MongoDB connection");
     return;
   }
-
   if (!process.env.MONGO_URI) {
     throw new Error("MONGO_URI not defined in .env");
   }
