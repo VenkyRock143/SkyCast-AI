@@ -7,18 +7,14 @@ require("dotenv").config();
 
 const app = express();
 
-origin: [
-  'http://localhost:3000',
-  'https://skycast-dashboard-ai.netlify.app',  // no trailing slash
-]
+app.use(cors({ origin: ['http://localhost:3000', 'https://skycast-dashboard-ai.netlify.app'], credentials: true }));
+app.use(helmet());
+app.use(express.json());
+
 const authRoutes = require("./routes/authRoutes");
 const cityRoutes = require("./routes/cityRoutes");
 const weatherRoutes = require("./routes/weatherRoutes");
 const aiRoutes = require("./routes/aiRoutes"); 
-
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
