@@ -1,9 +1,16 @@
 import axios from "axios";
-const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL
+
+const isLocal = typeof window !== "undefined" && window.location.hostname === "localhost";
+
+const BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL
     ? `${process.env.NEXT_PUBLIC_API_URL}/api`
-    : "http://localhost:5000/api", // local dev fallback
-});
+    : isLocal
+    ? "http://localhost:5000/api"                          //  local 
+    : "https://weather-dashboard-393c.onrender.com/api";  // production 
+
+const api = axios.create({ baseURL: BASE_URL });
+
 // Attach JWT token to every request automatically
 api.interceptors.request.use((config) => {
   if (typeof window !== "undefined") {
@@ -12,6 +19,7 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
 // Auto-logout if server returns 401 Unauthorized
 api.interceptors.response.use(
   (res) => res,
@@ -21,6 +29,7 @@ api.interceptors.response.use(
       window.location.href = "/login";
     }
     return Promise.reject(err);
-  },
+  }
 );
+
 export default api;
